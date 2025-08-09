@@ -1,0 +1,79 @@
+:root {
+  --clr-red: #EA4B5E;
+  /* primario */
+  --clr-orange: #F27D72;
+  /* secundario */
+  --clr-dark: #191919;
+  /* fuentes, fondos */
+  --clr-white: #f4f4f4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Spartan", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* scroll-padding-top: 100px;  en caso de un navbar ajustar tamaño*/
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-white);
+  color: var(--clr-dark);
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding-left: 3px;
+}
+
+/* FLEX ROW Y FLEX COLUMN */
+.flex-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+section,
+footer {
+  padding: 20px 10px;
+  gap: 18px;
+}
+
+
+/*responsive para pantallas de escritorio */
+@media (min-width: 768px) {}
