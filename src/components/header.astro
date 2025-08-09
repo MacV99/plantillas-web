@@ -24,10 +24,6 @@ import Navbar from "../components/navbar.astro";
     z-index: 100;
   }
 
-  header:hover {
-    background-color: #fff;
-  }
-
   header a {
     height: 100%;
     margin-right: auto;
@@ -45,6 +41,10 @@ import Navbar from "../components/navbar.astro";
     header {
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(5px);
+    }
+
+    header:hover {
+      background-color: var(--clr-white);
     }
   }
 </style>
