@@ -77,7 +77,7 @@ p {
 
 section,
 footer {
-  padding: 20px 20px;
+  padding: 50px 20px;
   gap: 18px;
 }
 
@@ -89,6 +89,11 @@ a.boton {
   border: none;
   letter-spacing: 2px;
   padding-left: 16px;
+}
+
+section>*,
+footer>* {
+  max-width: 1200px;
 }
 
 
