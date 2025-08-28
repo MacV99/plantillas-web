@@ -1,42 +1,22 @@
 ---
-import "../styles/global.css";
-import Footer from "../components/footer.astro";
-import Header from "../components/header.astro";
+import Layout1 from "../layouts/Layout1.astro";
+
 import Hero from "../components/hero.astro";
 import Section1 from "../components/section1.astro";
 import Section2 from "../components/section2.astro";
 import MisionVision from "../components/mision-vision.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-		/>
-		<!-- En tu layout/base o directamente en src/pages/index.astro -->
-		<title>PLANTILLA</title>
-	</head>
+<Layout1 title="Home">
+	<Hero />
 
-	<body>
-		<Header />
+	<Section1 />
 
-		<Hero />
+	<Section1 />
 
-		<Section1 />
+	<Section2 />
 
-		<Section1 />
+	<Section2 />
 
-		<Section2 />
-
-		<Section2 />
-
-		<MisionVision />
-
-		<Footer />
-	</body>
-</html>
+	<MisionVision />
+</Layout1>
