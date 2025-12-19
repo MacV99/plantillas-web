@@ -20,7 +20,7 @@ import Navbar from "../components/navbar.astro";
     height: 80px;
     margin: 10px auto;
     padding: 12px;
-    transition: 0.2s ease;
+    transition: var(--transition);
     z-index: 100;
   }
 
@@ -33,17 +33,18 @@ import Navbar from "../components/navbar.astro";
   header img {
     height: 100%;
     width: auto;
-    border-radius: 8px;
-    border: 2px solid var(--clr-dark);
+    border-radius: 12px;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 750px) {
     header {
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(5px);
       width: 98%;
     }
+  }
 
+  @media (hover: hover) {
     header:hover {
       background-color: var(--clr-white);
     }
