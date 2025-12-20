@@ -1,5 +1,5 @@
 <section class="flex-row">
-  <div>
+  <div class="flex-column">
     <h2><i class="bi bi-graph-up-arrow"></i>MISÍON</h2>
     <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur sint
@@ -8,7 +8,7 @@
     </p>
   </div>
 
-  <div>
+  <div class="flex-column">
     <h2><i class="bi bi-lightbulb"></i>VISIÓN</h2>
     <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur sint
@@ -24,15 +24,18 @@
   }
 
   div {
+    align-items: baseline;
     background-color: #fff;
     border: solid 1px var(--clr-border);
-    padding: 30px 20px;
+    padding: 27px 20px;
     border-radius: 18px;
     max-width: 400px;
+    gap: 5px;
   }
 
   h2 {
     display: flex;
+    color: var(--clr-dark2);
   }
 
   i {
