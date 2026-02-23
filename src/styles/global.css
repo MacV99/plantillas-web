@@ -1,37 +1,41 @@
-@import url("https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  --clr-main: #3e484d;
+  /* COLORES - Ajusta según tu proyecto */
+  --clr-primary: #00588b;
+  --clr-dark: #1a1a1a;
+  --clr-dark2: #333333;
+  --clr-white: #f7f7f7;
+  --clr-white2: #ebebeb;
 
-  --clr-dark: #121617;
-  --clr-dark2: #181d1f;
+  /* --clr-gray: #646464; */
+  --clr-text: #363636;
+  --clr-border: #e3e3e3;
 
-  --clr-gray: #646464;
-  --clr-text: #646464;
-  --clr-border: #d8dbdc;
+  /* TIPOGRAFÍA */
+  --font-main: "Montserrat", sans-serif;
 
-  --clr-white: #ebeded;
-
-  --transition: 0.11s ease;
-  --font-recursive: 'Recursive', sans-serif;
-  --font-montserrat: "Montserrat", sans-serif;
+  /* EFECTOS Y TIMING */
+  --transition: 0.12s ease;
+  --border-radius: 10px;
 }
 
-
+/* === RESET BÁSICO === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   line-height: normal;
-  font-family: var(--font-montserrat)
+  font-family: var(--font-main);
 }
 
+/* === HTML === */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 
+/* === BODY === */
 body {
   min-height: 100dvh;
   line-height: 1.6;
@@ -39,9 +43,9 @@ body {
   align-items: center;
   flex-direction: column;
   background-color: var(--clr-white);
-  color: var(--clr-dark);
 }
 
+/* === MAIN === */
 main {
   width: 100%;
   display: flex;
@@ -49,18 +53,24 @@ main {
   flex-direction: column;
 }
 
-li,
-a {
+/* === LISTAS Y ENLACES === */
+li {
   list-style: none;
-  text-decoration: none;
 }
 
-i.bi {
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* === ICONOS === */
+i {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* === HEADINGS === */
 h1,
 h2,
 h3,
@@ -68,14 +78,39 @@ h4,
 h5 {
   font-weight: 600;
   letter-spacing: 2px;
-  padding-left: 2px;
+  text-indent: 2px;
 }
 
+/* === PÁRRAFOS === */
 p {
   color: var(--clr-text);
+  line-height: normal;
 }
 
-/* FLEX ROW Y FLEX COLUMN */
+/* === SECCIONES Y FOOTER === */
+section,
+footer {
+  padding: 40px 20px;
+  gap: 18px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section>*,
+footer>* {
+  max-width: 1100px;
+}
+
+/* === SEPARADORES === */
+hr {
+  width: 100%;
+  border: solid 1px var(--clr-border);
+  margin: 5px 0;
+}
+
+/* === UTILIDADES FLEX === */
 .flex-column {
   display: flex;
   align-items: center;
@@ -90,51 +125,96 @@ p {
   flex-direction: row;
 }
 
-
-section,
-footer {
-  padding: 40px 20px;
-  gap: 18px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-section>*,
-footer>* {
-  max-width: 1000px;
-}
-
+/* === BOTONES === */
 button,
 .boton,
 .boton2 {
-  padding: 11px 14px 10px 14px;
+  padding: 11px 20px;
   border-radius: 50px;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 2px;
-  padding-left: 16px;
+  text-indent: 2px;
   text-transform: uppercase;
-  border: solid 2px #fff;
-  background-color: #fff;
-  color: var(--clr-dark);
+  border: solid 1px var(--clr-border);
+  background-color: var(--clr-white2);
+  color: var(--clr-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .boton2 {
   background-color: transparent;
-  border-color: #fff;
-  color: #fff;
+  color: var(--clr-text);
 }
 
+/* === FORMULARIOS === */
+input,
+textarea,
+select {
+  outline: none;
+  border: solid 1px var(--clr-border);
+  background-color: var(--clr-white2);
+  padding: 10px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  color: var(--clr-text);
+  transition: var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--clr-primary);
+}
+
+select {
+  cursor: pointer;
+}
+
+select option {
+  background-color: var(--clr-white2);
+  color: var(--clr-text);
+}
+
+textarea {
+  resize: vertical;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+input[type="file"] {
+  cursor: pointer;
+}
+
+/* === HOVER STATES === */
 @media (hover: hover) {
 
   button:hover,
-  .boton:hover {
-    background-color: var(--clr-white);
+  .boton:hover,
+  .boton2:hover {
+    background-color: var(--clr-border);
   }
 
-  .boton2:hover {
-    background-color: var(--clr-dark2);
+
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+
+  section,
+  footer {
+    padding: 55px 20px;
+  }
+
+  p {
+    font-size: 1.05rem;
   }
 }
