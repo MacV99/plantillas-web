@@ -1,51 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
-:root {
-  /* COLORES - Ajusta según tu proyecto */
-  --clr-primary: #00588b;
-  --clr-dark: #1a1a1a;
-  --clr-dark2: #333333;
-  --clr-white: #f7f7f7;
-  --clr-white2: #ebebeb;
 
-  /* --clr-gray: #646464; */
-  --clr-text: #363636;
-  --clr-border: #e3e3e3;
 
-  /* TIPOGRAFÍA */
-  --font-main: "Montserrat", sans-serif;
+/* =============================================
+   BASE
+   ============================================= */
 
-  /* EFECTOS Y TIMING */
-  --transition: 0.12s ease;
-  --border-radius: 10px;
-}
-
-/* === RESET BÁSICO === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  line-height: normal;
-  font-family: var(--font-main);
+  font-family: 'Montserrat', 'Gill Sans', sans-serif !important;
 }
 
-/* === HTML === */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 80px;
 }
 
-/* === BODY === */
 body {
-  min-height: 100dvh;
+  min-height: 100vh;
   line-height: 1.6;
   display: flex;
   align-items: center;
   flex-direction: column;
   background-color: var(--clr-white);
+  color: var(--clr-dark);
 }
 
-/* === MAIN === */
 main {
   width: 100%;
   display: flex;
@@ -53,64 +35,41 @@ main {
   flex-direction: column;
 }
 
-/* === LISTAS Y ENLACES === */
 li {
   list-style: none;
 }
 
 a {
   text-decoration: none;
-  cursor: pointer;
 }
 
-/* === ICONOS === */
 i {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* === HEADINGS === */
 h1,
 h2,
 h3,
 h4,
 h5 {
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 2px;
-  text-indent: 2px;
+  padding-left: 2px;
+  text-transform: uppercase;
 }
 
-/* === PÁRRAFOS === */
 p {
-  color: var(--clr-text);
-  line-height: normal;
+  color: var(--clr-dark2);
+  font-size: .9rem;
+  line-height: 1.5;
 }
 
-/* === SECCIONES Y FOOTER === */
-section,
-footer {
-  padding: 40px 20px;
-  gap: 18px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* =============================================
+   FLEX HELPERS
+   ============================================= */
 
-section>*,
-footer>* {
-  max-width: 1100px;
-}
-
-/* === SEPARADORES === */
-hr {
-  width: 100%;
-  border: solid 1px var(--clr-border);
-  margin: 5px 0;
-}
-
-/* === UTILIDADES FLEX === */
 .flex-column {
   display: flex;
   align-items: center;
@@ -125,96 +84,131 @@ hr {
   flex-direction: row;
 }
 
-/* === BOTONES === */
-button,
-.boton,
-.boton2 {
-  padding: 11px 20px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-indent: 2px;
-  text-transform: uppercase;
-  border: solid 1px var(--clr-border);
-  background-color: var(--clr-white2);
-  color: var(--clr-primary);
+/* =============================================
+   SECTIONS & FOOTER
+   ============================================= */
+
+section,
+footer {
+  padding: 50px 20px;
+  gap: 18px;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+
+section>*,
+footer>* {
+  max-width: 900px;
+}
+
+/* =============================================
+   BOTONES
+   ============================================= */
+
+a.boton,
+.button1 {
+  padding: 10px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 13px;
+  border: none;
+  letter-spacing: 2px;
   cursor: pointer;
   transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.boton2 {
-  background-color: transparent;
-  color: var(--clr-text);
+.button1 {
+  background-color: var(--clr-green);
+  color: var(--clr-white);
 }
 
-/* === FORMULARIOS === */
-input,
-textarea,
-select {
-  outline: none;
-  border: solid 1px var(--clr-border);
-  background-color: var(--clr-white2);
-  padding: 10px;
-  font-size: 1rem;
-  font-family: var(--font-main);
-  color: var(--clr-text);
+.button2 {
+  padding: 7px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
   transition: var(--transition);
+  text-transform: uppercase;
+  border-radius: 12px;
+  border: solid 1px var(--clr-gray);
+  background-color: var(--clr-white);
+  letter-spacing: 1px;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+.button2.active {
+  background-color: var(--clr-primary);
+  color: var(--clr-white);
   border-color: var(--clr-primary);
 }
 
-select {
-  cursor: pointer;
+/* =============================================
+   ANIMACIONES GENÉRICAS
+   ============================================= */
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 0.6;
+  }
 }
 
-select option {
-  background-color: var(--clr-white2);
-  color: var(--clr-text);
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-textarea {
-  resize: vertical;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
+/* =============================================
+   HOVER & RESPONSIVE
+   ============================================= */
 
-input[type="file"] {
-  cursor: pointer;
-}
-
-/* === HOVER STATES === */
 @media (hover: hover) {
-
-  button:hover,
-  .boton:hover,
-  .boton2:hover {
-    background-color: var(--clr-border);
+  .button1:hover {
+    background-color: var(--clr-green2);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
   }
 
-
+  .button2:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    border-color: var(--clr-primary);
+  }
 }
 
-/* === RESPONSIVE === */
-@media (min-width: 768px) {
-
-  section,
-  footer {
-    padding: 55px 20px;
-  }
-
-  p {
-    font-size: 1.05rem;
+@media (min-width: 750px) {
+  h1 {
+    font-size: 2rem;
   }
 }
