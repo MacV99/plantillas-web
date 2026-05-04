@@ -3,7 +3,9 @@ import Navbar from "../components/navbar.astro";
 ---
 
 <header class="flex-row">
-  <a href="/"><img src="/img/logo.jpg" alt="img-logo" /></a>
+  <a href="/" aria-label="Inicio">
+    <img src="/img/logo-png-mini.avif" alt="Logo" class="logo" />
+  </a>
   <Navbar />
 </header>
 
@@ -14,7 +16,7 @@ import Navbar from "../components/navbar.astro";
     position: sticky;
     top: 10px;
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+    box-shadow: var(--shadow-md);
     border-radius: 20px;
     width: 95%;
     height: 80px;
@@ -30,7 +32,7 @@ import Navbar from "../components/navbar.astro";
     display: flex;
   }
 
-  header img {
+  .logo {
     height: 100%;
     width: auto;
     border-radius: 12px;
@@ -50,5 +52,3 @@ import Navbar from "../components/navbar.astro";
     }
   }
 </style>
-
-<script></script>

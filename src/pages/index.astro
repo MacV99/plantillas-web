@@ -5,40 +5,39 @@ import Hero from "../sections/hero.astro";
 import MisionVision from "../components/mision-vision.astro";
 ---
 
-<Layout1 title="Home">
+<Layout1 title="Tu Empresa">
 	<Hero />
 
 	<section id="puntos">
-		<div class="flex-row">
+		<div class="flex-row puntos-grid">
 			<div>
-				<i class="bi bi-pin-angle-fill"></i>
-				<p>Registro personal de experiencias</p>
+				<i class="bi bi-check-circle-fill"></i>
+				<p>Característica 1</p>
 			</div>
 			<div>
-				<i class="bi bi-star-fill"></i>
-				<p>Calificación precisa por plato</p>
+				<i class="bi bi-check-circle-fill"></i>
+				<p>Característica 2</p>
 			</div>
 			<div>
-				<i class="bi bi-people-fill"></i>
-				<p>Red social de recomendaciones reales</p>
+				<i class="bi bi-check-circle-fill"></i>
+				<p>Característica 3</p>
 			</div>
 			<div>
-				<i class="bi bi-fork-knife"></i>
-				<p>Ecosistema para restaurantes oficiales</p>
+				<i class="bi bi-check-circle-fill"></i>
+				<p>Característica 4</p>
 			</div>
 			<div>
-				<i class="bi bi-clipboard-data-fill"></i>
-				<p>Datos y estadísticas gastronómicas reales</p>
+				<i class="bi bi-check-circle-fill"></i>
+				<p>Característica 5</p>
 			</div>
 		</div>
 	</section>
+
 	<MisionVision />
 </Layout1>
 
 <style>
-	#puntos {
-	}
-	#puntos > div {
+	#puntos > div.puntos-grid {
 		flex-wrap: wrap;
 		gap: 10px;
 		justify-content: center;
@@ -50,10 +49,11 @@ import MisionVision from "../components/mision-vision.astro";
 		align-items: center;
 		max-width: fit-content;
 		padding: 10px 15px;
-		background-color: #fff;
-		border: solid 1px var(--clr-border);
+		background-color: var(--clr-white);
+		border: solid 1px var(--clr-gray);
 		border-radius: 15px;
 		gap: 10px;
+		transition: var(--transition);
 	}
 
 	#puntos .bi {
@@ -62,15 +62,10 @@ import MisionVision from "../components/mision-vision.astro";
 		transition: var(--transition);
 	}
 
-	@media (min-width: 750px) {
-		#puntos > div > div {
-		}
-	}
-
 	@media (hover: hover) {
 		#puntos > div > div:hover .bi,
 		#puntos > div > div:hover p {
-			color: var(--clr-main);
+			color: var(--clr-primary);
 		}
 	}
 </style>

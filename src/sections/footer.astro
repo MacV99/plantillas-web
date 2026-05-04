@@ -3,20 +3,22 @@
 ---
 
 <footer class="flex-column">
-  <img src="/img/logo.jpg" alt="logo" />
-  <h3>"Enterprise's name"</h3>
+  <img src="/img/logo-png.avif" alt="Logo" class="logo" />
+  <h3>Tu Empresa</h3>
 
-  <div class="contact-info">
-    <p>+57 3172366425</p>
-    <p>cuellarmigue@gmail.com</p>
-    <p>Neiva, Huila</p>
+  <div class="contact-info flex-column">
+    <p><i class="bi bi-telephone"></i>+00 0000000000</p>
+    <p><i class="bi bi-envelope"></i>correo@tuempresa.com</p>
+    <p><i class="bi bi-geo-alt"></i>Tu Ciudad, País</p>
   </div>
+
   <div class="flex-row follow">
-    <a href=""><i class="bi bi-whatsapp"></i></a>
-    <a href=""><i class="bi bi-instagram"></i></a>
-    <a href=""><i class="bi bi-tiktok"></i></a>
+    <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+    <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+    <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
   </div>
-  <code>©Copyright 2025 By MacV</code>
+
+  <code>©2025 Tu Empresa</code>
 </footer>
 
 <style>
@@ -27,27 +29,32 @@
     padding-bottom: 20px;
   }
 
-  img {
-    background-color: var(--clr-dark);
+  .logo {
     width: 80px;
     height: 80px;
     margin-top: -80px;
     border-radius: 10px;
+    object-fit: contain;
+  }
+
+  h3 {
+    color: var(--clr-white);
+  }
+
+  .contact-info {
+    gap: 6px;
   }
 
   .contact-info p {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 8px;
     color: var(--clr-white);
-    justify-content: center;
-  }
-
-  .contact-info p i {
-    margin-right: 10px;
   }
 
   .follow {
-    border: solid 1px #ffffff5a;
+    border: solid 1px rgba(255, 255, 255, 0.35);
     border-radius: 50px;
     overflow: hidden;
     backdrop-filter: blur(10px);
