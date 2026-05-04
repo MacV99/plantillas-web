@@ -50,7 +50,7 @@ import MisionVision from "../components/mision-vision.astro";
 		max-width: fit-content;
 		padding: 10px 15px;
 		background-color: var(--clr-white);
-		border: solid 1px var(--clr-gray);
+		border: solid 1px var(--border-soft);
 		border-radius: 15px;
 		gap: 10px;
 		transition: var(--transition);
@@ -58,12 +58,16 @@ import MisionVision from "../components/mision-vision.astro";
 
 	#puntos .bi {
 		font-size: 1.4rem;
-		color: var(--clr-dark);
+		color: var(--clr-accent);
 		transition: var(--transition);
 	}
 
 	@media (hover: hover) {
-		#puntos > div > div:hover .bi,
+		#puntos > div > div:hover {
+			border-color: var(--border-hover);
+			background-color: var(--clr-primary-light);
+		}
+
 		#puntos > div > div:hover p {
 			color: var(--clr-primary);
 		}

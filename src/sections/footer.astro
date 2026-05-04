@@ -7,9 +7,9 @@
   <h3>Tu Empresa</h3>
 
   <div class="contact-info flex-column">
-    <p><i class="bi bi-telephone"></i>+00 0000000000</p>
-    <p><i class="bi bi-envelope"></i>correo@tuempresa.com</p>
-    <p><i class="bi bi-geo-alt"></i>Tu Ciudad, País</p>
+    <p><i class="bi bi-telephone-fill"></i>+00 0000000000</p>
+    <p><i class="bi bi-envelope-fill"></i>correo@tuempresa.com</p>
+    <p><i class="bi bi-geo-alt-fill"></i>Tu Ciudad, País</p>
   </div>
 
   <div class="flex-row follow">
@@ -67,9 +67,14 @@
     transition: var(--transition);
   }
 
+  code {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.75rem;
+  }
+
   @media (hover: hover) {
     .follow i:hover {
-      background-color: var(--clr-dark2);
+      background-color: var(--footer-hover-bg);
     }
   }
 </style>

@@ -10,8 +10,14 @@
 <style>
   section {
     text-align: center;
-    background-color: var(--clr-white);
-    border-bottom: solid 1px var(--clr-gray);
+    background-color: var(--clr-primary-light);
+    background-image: radial-gradient(
+      circle,
+      rgba(var(--rgb-primary), 0.15) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+    border-bottom: solid 1px var(--border-soft);
     height: 300px;
     gap: 8px;
   }
@@ -22,7 +28,7 @@
     font-weight: 100;
     letter-spacing: 18px;
     padding-left: 18px;
-    color: var(--clr-dark);
+    color: var(--clr-primary);
   }
 
   p {

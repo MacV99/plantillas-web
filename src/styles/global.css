@@ -1,11 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-
-
-
-/* =============================================
-   BASE
-   ============================================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -41,6 +33,7 @@ li {
 
 a {
   text-decoration: none;
+  color: var(--clr-primary);
 }
 
 i {
@@ -123,7 +116,7 @@ a.boton,
 }
 
 .button1 {
-  background-color: var(--clr-green);
+  background-color: var(--clr-accent);
   color: var(--clr-white);
 }
 
@@ -195,7 +188,7 @@ a.boton,
 
 @media (hover: hover) {
   .button1:hover {
-    background-color: var(--clr-green2);
+    background-color: color-mix(in oklch, var(--clr-accent) 75%, black);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
   }
