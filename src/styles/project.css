@@ -21,10 +21,25 @@
 
   --transition: all 0.2s ease;
 
-  /* ── CANALES RGB DEL PROYECTO ── */
-  --rgb-primary: 26, 26, 26;
-  --rgb-accent: 154, 0, 181;
-  --rgb-green: 43, 147, 72;
+  /* ── ESCALA DE ESPACIADO (pasos fijos) ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ── RADIUS ── */
+  --radius-sm: 12px;
+  --radius-md: 14px;
+
+  /* ── CANALES RGB DEL PROYECTO (deben coincidir con su --clr-*) ── */
+  --rgb-primary: 54, 54, 54;   /* #363636 */
+  --rgb-accent: 72, 126, 105;  /* #487e69 */
+  --rgb-green: 43, 147, 72;    /* #2b9348 */
 
   /* ── SOMBRAS CON PRIMARIO DEL PROYECTO ── */
   --shadow-sm: 0 2px 8px rgba(var(--rgb-primary), 0.08);
@@ -59,6 +74,6 @@
   --bg-subtle: rgba(var(--rgb-primary), 0.06);
   --overlay-card: rgba(var(--rgb-primary), 0.88);
 
-  /* ── FOCUS RING ── */
-  --focus-ring: 0 0 0 3px rgba(var(--rgb-primary), 0.08);
+  /* ── FOCUS RING (visible, AA) ── */
+  --focus-ring: 0 0 0 3px rgba(var(--rgb-accent), 0.55);
 }
