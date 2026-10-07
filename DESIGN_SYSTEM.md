@@ -34,8 +34,8 @@ transparencias lleva su `--rgb-*` gemelo y se actualizan JUNTOS (drift ya ocurri
 > Valores hex viven en `project.css`. Aquí solo roles.
 
 ## 4. Tipografía
-- Familia única: **Montserrat** (import en `project.css`), fallback `Gill Sans`.
-- Pesos cargados: 300·400·500·600·700·800.
+- Familia única: **Montserrat** (`<link>` con preconnect en `Layout1.astro`), fallback `Gill Sans`.
+- Pesos cargados: 300·400·600·700 (300 = H1 del hero).
 - Títulos `h1–h5`: peso 700, UPPERCASE, `letter-spacing: 2px`.
 - Cuerpo `p`: `--clr-dark2`, `.9rem`, `line-height 1.5`.
 - H1 escala a `2rem` en `min-width: 750px`.
@@ -59,7 +59,7 @@ Concepto ↔ clase real ↔ tokens. Sincronizar con el código.
 
 | Componente | Clase | Tokens clave | Regla |
 | ---------- | ----- | ------------ | ----- |
-| CTA primario | `.button1` (+`.boton`) | `--clr-accent`, `--clr-white`, `--shadow-sm` | fondo acento, hover oscurece 75% + `translateY(-1px)` |
+| CTA primario | `.button1` (+`.boton`) | `--clr-accent`, `--clr-white`, `--shadow-sm` | fondo acento, hover `--clr-accent-hover` + `translateY(-1px)` |
 | Acción alterna | `.button2` | `--clr-gray`, `--clr-primary`, `--clr-white` | borde gris; `.active`/hover invierte a primario |
 | Header | `header .flex-row` | `--header-bg-*`, blur | sticky, glass, logo `logo-png-mini.avif` |
 | Hero | `.hero .flex-column` | `--hero-overlay` | overlay primario .72 sobre imagen |
@@ -69,15 +69,16 @@ Concepto ↔ clase real ↔ tokens. Sincronizar con el código.
 ## 9. Estados interactivos
 | Elemento | Hover / Focus |
 | -------- | ------------- |
-| `.button1` | oscurece acento 75%, `translateY(-1px)`, `--shadow-sm` |
+| `.button1` | `--clr-accent-hover` (acento 80% + blanco), `translateY(-1px)`, `--shadow-sm` |
+| Tarjetas | borde `--border-hover` + `--shadow-sm` |
 | `.button2` | invierte a `--clr-primary` sobre blanco |
 | Link | hereda `--clr-primary` |
-| Foco teclado | `:focus-visible` global → `box-shadow: var(--focus-ring)` (anillo acento 55%) |
+| Foco teclado | `:focus-visible` global → `box-shadow: var(--focus-ring)` (anillo acento 35%) |
 
 Orden CSS obligatorio: base → `@media (hover:hover)` → `@media (min-width)` (skill `css-order`).
 
 ## 10. Accesibilidad (mínimo AA)
-- **Revisar:** `--clr-dark2` (#464646) sobre `--clr-white` ≈ 8.5:1 ✓. Gris `--clr-gray` como
+- `--clr-dark2` (gris medio) sobre `--clr-white` ≈ 5:1 ✓ AA. Gris `--clr-gray` como
   texto NO pasa — solo pa bordes/fondos.
 - `:focus-visible` global aplicado (anillo `--focus-ring` sobre acento, visible AA).
 - `prefers-reduced-motion: reduce` neutraliza animaciones/transiciones/scroll suave.
@@ -101,3 +102,6 @@ Registro fechado de cambios de identidad (fecha absoluta · qué cambió · por 
   Botones migrados a `--radius-*`.
 - `2026-08-19` — Accesibilidad: `:focus-visible` global visible (`--focus-ring` subido de 8%
   primario a 55% acento) + bloque `prefers-reduced-motion`.
+- `2026-10-07` — Paleta por defecto pasa a escala de grises minimalista (primario y acento
+  casi negro, fondo blanco grisáceo, puntos de fondo al 6%). Nuevo `--clr-accent-hover`.
+  Hovers unificados: borde + sombra suave en tarjetas. Fuente sin `@import` y pesos reducidos.

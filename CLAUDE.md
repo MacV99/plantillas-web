@@ -12,21 +12,25 @@ pnpm preview    # previsualizar build
 
 ## Arquitectura
 
-Plantilla base de MacV para sitios web de clientes. Solo Astro, sin frameworks adicionales. Al clonar para un nuevo proyecto, los únicos archivos que se tocan para adaptar al cliente son `project.css` (colores/marca) y los textos en los componentes.
+Plantilla base de MacV para sitios web de clientes. Solo Astro, sin frameworks adicionales. Al clonar para un nuevo cliente se tocan solo: `src/data/cliente.ts` (todos los textos y datos: nombre, contacto, redes, menú, servicios, etc.), `project.css` (colores) y las imágenes de `public/img/`. Los componentes leen de `cliente.ts` — nunca escribir textos del cliente directo en ellos.
 
 ```
 src/
+├── data/
+│   └── cliente.ts      ← ÚNICA fuente de textos/datos del cliente (SEO, contacto, redes, servicios…)
 ├── styles/
 │   ├── global.css      ← resets, utilidades flex, botones, formularios — NO tocar entre proyectos
 │   └── project.css     ← variables :root del proyecto (colores, sombras, overlays) — personalizar aquí
 ├── layouts/
-│   └── Layout1.astro   ← único layout; importa ambos CSS, Bootstrap Icons CDN, header + footer
+│   └── Layout1.astro   ← único layout; CSS, fuente + íconos (con preconnect), SEO/Open Graph, header + footer
 ├── sections/
 │   ├── hero.astro
-│   └── footer.astro
+│   ├── servicios.astro ← grid de tarjetas (ícono o imagen opcional), #servicios
+│   └── footer.astro    ← #contacto
 ├── components/
 │   ├── header.astro    ← sticky, glassmorphism, logo desde /img/logo-png-mini.avif
 │   ├── navbar.astro    ← hamburger mobile, inline desktop, Escape cierra
+│   ├── caracteristicas.astro
 │   └── mision-vision.astro
 └── pages/
     ├── index.astro
@@ -40,13 +44,13 @@ src/
 Para adaptar al cliente, cambiar en `project.css`:
 
 ```css
---clr-primary: #032132;   /* color base — genera primary-mid y primary-light via color-mix */
---clr-accent:  #61c3ff;   /* color de vida — botón principal, íconos decorativos */
---rgb-primary: 3, 33, 50; /* canales RGB del primary — actualizar junto con --clr-primary */
---rgb-accent:  97, 195, 255; /* canales RGB del accent */
+--clr-primary: #111111;    /* color base — genera primary-mid y primary-light via color-mix */
+--clr-accent:  #111111;    /* botón principal, íconos decorativos (hover: --clr-accent-hover) */
+--rgb-primary: 17, 17, 17; /* canales RGB del primary — actualizar junto con --clr-primary */
+--rgb-accent:  17, 17, 17; /* canales RGB del accent */
 ```
 
-Las variables semánticas derivadas (`--border-soft`, `--border-hover`, `--bg-subtle`, `--hero-overlay`, `--shadow-*`, `--header-bg-*`, etc.) se recalculan solas via `rgba(var(--rgb-primary), opacidad)`. Los neutros (`--clr-dark`, `--clr-gray`, `--clr-white`) rara vez se tocan.
+Por defecto la paleta es escala de grises minimalista. Las variables semánticas derivadas (`--border-soft`, `--border-hover`, `--bg-subtle`, `--hero-overlay`, `--shadow-*`, `--header-bg-*`, etc.) se recalculan solas via `rgba(var(--rgb-primary), opacidad)`. Los neutros (`--clr-dark`, `--clr-gray`, `--clr-white`) rara vez se tocan.
 
 ## Reglas CSS obligatorias
 
@@ -77,5 +81,8 @@ Logos en `public/img/` en formato `.avif`:
 - `logo-png-mini.avif` → header (transparente, mini)
 - `logo-png.avif` → footer (transparente, tamaño completo)
 - `logo-mini.avif` / `logo.avif` → versiones con fondo
+- `og.jpg` → imagen 1200×630 al compartir el enlace (Open Graph)
 
-Bootstrap Icons vía CDN en Layout1 — usar variantes `-fill` para íconos decorativos/informativos.
+Bootstrap Icons y Montserrat (pesos 300·400·600·700) vía CDN en Layout1 — no usar `@import` de fuentes en CSS (bloquea la carga). Íconos: variantes `-fill` para decorativos/informativos.
+
+Utilidades en `global.css`: `.flex-row`, `.flex-column`, `.bg-dots` (fondo de puntos), `.button1`, `.button2`, `.sin-scroll`.

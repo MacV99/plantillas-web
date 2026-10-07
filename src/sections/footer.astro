@@ -1,34 +1,36 @@
 ---
+import { cliente } from "../data/cliente";
 
+const year = new Date().getFullYear();
 ---
 
-<footer class="flex-column">
-  <img src="/img/logo-png.avif" alt="Logo" class="logo" />
-  <h3>Tu Empresa</h3>
+<footer class="flex-column" id="contacto">
+  <img src="/img/logo-png.avif" alt={`Logo ${cliente.nombre}`} class="logo" width="80" height="80" loading="lazy" />
+  <h3>{cliente.nombre}</h3>
 
   <div class="contact-info flex-column">
-    <p><i class="bi bi-telephone-fill"></i>+00 0000000000</p>
-    <p><i class="bi bi-envelope-fill"></i>correo@tuempresa.com</p>
-    <p><i class="bi bi-geo-alt-fill"></i>Tu Ciudad, País</p>
+    <a class="flex-row" href={`tel:${cliente.telefono.replace(/\s/g, "")}`}><i class="bi bi-telephone-fill"></i>{cliente.telefono}</a>
+    <a class="flex-row" href={`mailto:${cliente.correo}`}><i class="bi bi-envelope-fill"></i>{cliente.correo}</a>
+    <p class="flex-row"><i class="bi bi-geo-alt-fill"></i>{cliente.ciudad}</p>
   </div>
 
   <div class="flex-row follow">
-    <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-    <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-    <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+    {
+      cliente.redes.map(({ nombre, icono, url }) => (
+        <a href={url} aria-label={nombre} target="_blank" rel="noopener">
+          <i class={`bi ${icono}`} />
+        </a>
+      ))
+    }
   </div>
 
-  <code>©2025 Tu Empresa</code>
+  <small>©{year} {cliente.nombre}</small>
 </footer>
 
 <style>
   footer {
     background-color: var(--clr-dark);
-    background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.08) 1px,
-      transparent 1px
-    );
+    background-image: radial-gradient(circle, var(--footer-dots) 1px, transparent 1px);
     background-size: 22px 22px;
     margin-top: auto;
     color: var(--clr-white);
@@ -51,16 +53,14 @@
     gap: 6px;
   }
 
-  .contact-info p {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  .contact-info > * {
     gap: 8px;
+    font-size: 0.9rem;
     color: var(--clr-white);
   }
 
   .follow {
-    border: solid 1px rgba(255, 255, 255, 0.35);
+    border: solid 1px var(--footer-border);
     border-radius: 50px;
     overflow: hidden;
     backdrop-filter: blur(10px);
@@ -73,8 +73,8 @@
     transition: var(--transition);
   }
 
-  code {
-    color: rgba(255, 255, 255, 0.45);
+  small {
+    color: var(--footer-muted);
     font-size: 0.75rem;
   }
 

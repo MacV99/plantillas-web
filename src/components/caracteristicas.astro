@@ -1,0 +1,47 @@
+---
+import { cliente } from "../data/cliente";
+---
+
+<section>
+  <ul class="flex-row">
+    {
+      cliente.caracteristicas.map((texto) => (
+        <li class="flex-row bg-dots">
+          <i class="bi bi-check-circle-fill" />
+          <p>{texto}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  ul {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  li {
+    padding: 10px 15px;
+    border: solid 1px var(--border-soft);
+    border-radius: 15px;
+    gap: 10px;
+    transition: var(--transition);
+  }
+
+  i {
+    font-size: 1.4rem;
+    color: var(--clr-accent);
+  }
+
+  @media (hover: hover) {
+    li:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-sm);
+    }
+
+    li:hover p {
+      color: var(--clr-primary);
+    }
+  }
+</style>

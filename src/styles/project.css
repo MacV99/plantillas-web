@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-
 :root {
   /* ── PALETA DEL PROYECTO ── */
-  --clr-primary: #363636;
+  --clr-primary: #111111;
   --clr-primary-mid: color-mix(in oklch, var(--clr-primary) 90%, white);
-  --clr-primary-light: color-mix(in oklch, var(--clr-primary) 8%, white);
+  --clr-primary-light: color-mix(in oklch, var(--clr-primary) 3%, white);
 
-  --clr-accent: #487e69;
+  --clr-accent: #111111;
+  --clr-accent-hover: color-mix(in oklch, var(--clr-accent) 80%, white);
 
   --clr-green: #2b9348;
   --clr-green2: color-mix(in oklch, var(--clr-green) 75%, black);
@@ -14,10 +13,10 @@
   --clr-danger: #e11d48;
 
   /* ── NEUTROS ── */
-  --clr-dark: #191919;
-  --clr-dark2: #464646;
-  --clr-gray: #dcdcdc;
-  --clr-white: #f4f4f4;
+  --clr-dark: #111111;
+  --clr-dark2: #6b6b6b;
+  --clr-gray: #e4e4e4;
+  --clr-white: #f7f7f7;
 
   --transition: all 0.2s ease;
 
@@ -37,8 +36,8 @@
   --radius-md: 14px;
 
   /* ── CANALES RGB DEL PROYECTO (deben coincidir con su --clr-*) ── */
-  --rgb-primary: 54, 54, 54;   /* #363636 */
-  --rgb-accent: 72, 126, 105;  /* #487e69 */
+  --rgb-primary: 17, 17, 17;   /* #111111 */
+  --rgb-accent: 17, 17, 17;    /* #111111 */
   --rgb-green: 43, 147, 72;    /* #2b9348 */
 
   /* ── SOMBRAS CON PRIMARIO DEL PROYECTO ── */
@@ -64,16 +63,19 @@
   --hero-overlay: rgba(var(--rgb-primary), 0.72);
 
   /* ── FOOTER ── */
-  --footer-hover-bg: rgba(255, 255, 255, 0.07);
+  --footer-hover-bg: rgba(255, 255, 255, 0.1);
+  --footer-dots: rgba(255, 255, 255, 0.08);
+  --footer-border: rgba(255, 255, 255, 0.35);
+  --footer-muted: rgba(255, 255, 255, 0.45);
 
   /* ── BORDES ── */
-  --border-soft: rgba(var(--rgb-primary), 0.1);
-  --border-hover: rgba(var(--rgb-primary), 0.22);
+  --border-soft: rgba(var(--rgb-primary), 0.08);
+  --border-hover: rgba(var(--rgb-primary), 0.2);
 
   /* ── FONDOS Y OVERLAYS ── */
   --bg-subtle: rgba(var(--rgb-primary), 0.06);
   --overlay-card: rgba(var(--rgb-primary), 0.88);
 
   /* ── FOCUS RING (visible, AA) ── */
-  --focus-ring: 0 0 0 3px rgba(var(--rgb-accent), 0.55);
+  --focus-ring: 0 0 0 3px rgba(var(--rgb-accent), 0.35);
 }

@@ -1,42 +1,41 @@
-<section class="flex-column">
-  <h1>Tu Empresa</h1>
-  <p>Breve descripción del negocio o propuesta de valor.</p>
+---
+import { cliente } from "../data/cliente";
+---
+
+<section class="flex-column bg-dots">
+  <h1>{cliente.nombre}</h1>
+  <p>{cliente.descripcion}</p>
   <div class="buttons flex-row">
-    <a class="boton button1" href="#contacto">Contáctanos</a>
-    <a class="boton2 button2" href="#servicios">Saber Más</a>
+    <a class="button1" href={cliente.whatsapp} target="_blank" rel="noopener">
+      <i class="bi bi-whatsapp"></i>Contáctanos
+    </a>
+    <a class="button2" href="#servicios">Saber más</a>
   </div>
 </section>
 
 <style>
   section {
     text-align: center;
-    background-color: var(--clr-primary-light);
-    background-image: radial-gradient(
-      circle,
-      rgba(var(--rgb-primary), 0.15) 1px,
-      transparent 1px
-    );
-    background-size: 22px 22px;
     border-bottom: solid 1px var(--border-soft);
-    height: 300px;
+    min-height: 300px;
     gap: 8px;
   }
 
   h1 {
     font-size: 2.8rem;
     line-height: normal;
-    font-weight: 100;
+    font-weight: 300;
     letter-spacing: 18px;
     padding-left: 18px;
     color: var(--clr-primary);
   }
 
   p {
-    color: var(--clr-dark2);
     font-size: 0.95rem;
   }
 
   .buttons {
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 6px;
   }

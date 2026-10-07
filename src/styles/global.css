@@ -1,3 +1,7 @@
+@view-transition {
+  navigation: auto;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -29,6 +33,11 @@ main {
 
 li {
   list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 a {
@@ -84,6 +93,20 @@ p {
 }
 
 /* =============================================
+   FONDO DE PUNTOS
+   ============================================= */
+
+.bg-dots {
+  background-color: var(--clr-primary-light);
+  background-image: radial-gradient(circle, rgba(var(--rgb-primary), 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.sin-scroll {
+  overflow: hidden;
+}
+
+/* =============================================
    SECTIONS & FOOTER
    ============================================= */
 
@@ -102,11 +125,15 @@ footer>* {
   max-width: 900px;
 }
 
+/* aire para el logo del footer, que sube sobre la última sección */
+main>section:last-child {
+  padding-bottom: 70px;
+}
+
 /* =============================================
    BOTONES
    ============================================= */
 
-a.boton,
 .button1 {
   padding: 10px 20px;
   border-radius: var(--radius-md);
@@ -119,9 +146,6 @@ a.boton,
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.button1 {
   background-color: var(--clr-accent);
   color: var(--clr-white);
 }
@@ -194,7 +218,7 @@ a.boton,
 
 @media (hover: hover) {
   .button1:hover {
-    background-color: color-mix(in oklch, var(--clr-accent) 75%, black);
+    background-color: var(--clr-accent-hover);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
   }
