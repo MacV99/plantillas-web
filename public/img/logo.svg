@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Logo de relleno: el punto de partida sobre la cuadrícula. Reemplazar por el del cliente. -->
+  <rect width="64" height="64" rx="16" fill="#111214"/>
+  <!-- Aro fino: lo separa del fondo en tema oscuro -->
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2"/>
+  <path d="M23 12v40M12 41h40" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="23" cy="41" r="9" fill="#c8f31d" stroke="#111214" stroke-width="4"/>
+</svg>

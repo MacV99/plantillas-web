@@ -1,107 +1,107 @@
 # Plantilla Base MacV — Sistema de Diseño
 
-> Fuente de identidad: plantilla neutra de MacV. No hay marca propia — es el punto de partida
-> que cada cliente re-marca.
-> Objetivo: base sobria y limpia que se adapta a cualquier cliente cambiando 2 primitivos.
-> **Fuente de verdad de valores:** `src/styles/project.css` (`:root`). Este doc explica el
-> **porqué**; nunca duplica hex ni px que puedan quedar viejos.
+> Plantilla neutra de MacV. No hay marca propia: es el punto de partida que cada cliente re-marca.
+> **Fuente de verdad de valores:** `src/styles/project.css`. Este doc explica el **porqué**; nunca copia hex ni px.
+> **Referencia viva:** la página `/estilos` muestra cada valor y pieza funcionando. Si algo no está ahí, no existe todavía.
 
 ---
 
-## 1. Personalidad de marca
-Neutra · limpia · sobria · profesional · flexible. Sensación objetivo: confianza sin ruido,
-lienzo en blanco listo pa vestir. Anti-referencia: nada recargado, nada tipo plantilla
-genérica de ThemeForest con degradados y sombras por todos lados.
+## 1. Personalidad
+Minimalista · compacta · sobria · elegante · profesional. Sensación: una marca que no necesita gritar.
+**Referencia:** página de producto de una empresa de tecnología seria: mucho blanco, letra firme, líneas finas.
+**Anti-referencia:** plantilla genérica con todo centrado, títulos en mayúsculas espaciadas, degradados, sombras por todos lados y tarjetas que saltan.
 
-## 2. Principios de diseño
-1. **Claro por defecto** — fondo `--clr-white`, texto `--clr-dark`.
-2. El acento se gana su lugar (regla 70/20/10). Solo botón principal e íconos decorativos.
-3. **Glassmorphism del header** = firma. Único recurso visual distintivo de la base.
-4. Títulos UPPERCASE con `letter-spacing`; cuerpo en sentence case, sin italic.
-5. Aire: secciones con `padding: 50px 20px`, `max-width: 900px` en el contenido.
+## 2. Principios
+1. **Escala de grises por defecto.** La jerarquía sale de tamaño, peso y espacio, no del color.
+2. **Líneas finas en vez de cajas.** Una línea de 1 px separa secciones, cifras y preguntas. Tarjeta solo cuando el contenido es una unidad (servicio, plan, opinión).
+3. **Alineado a la izquierda.** Título a la izquierda y texto a la derecha en computador. Centrado solo en páginas de un solo mensaje (error, mantenimiento).
+4. **Títulos en minúsculas, con las letras juntas** y peso medio-fuerte. Nada en mayúsculas salvo las etiquetas.
+5. **Etiquetas en letra de máquina**, pequeñas y en mayúsculas: dan el tono técnico y ordenado.
+6. **Regla 60 · 30 · 10.** 60 % fondo (blanco o casi negro), 30 % tinta (texto, bordes, botón oscuro) y 10 % color de vida. **El color de vida es el único que puede pedir un clic**: botón principal de cada bloque, botón flotante, número de sección, punto de la portada y pequeños detalles (chulos, comillas, la «×» de una pregunta abierta). Nunca en fondos grandes, íconos de tarjeta ni títulos. Los colores de estado (éxito · aviso · peligro) solo comunican estado.
+7. **Compacto.** Controles bajos, esquinas discretas, cabecera de poco alto. El aire va entre secciones, no dentro de las piezas.
+8. **Nada se mueve porque sí.** La tarjeta se queda quieta al pasar el mouse; solo cambian borde y sombra, o se mueve la imagen de adentro.
+9. **Todo sigue el tema.** Ningún bloque queda oscuro en tema claro (ni el pie ni la llamada).
 
-## 3. Color — jerarquía de uso (70/20/10)
-| Peso | Rol | Token |
-| ---- | --- | ----- |
-| 70% | Fondo / superficies | `--clr-white`, `--clr-primary-light` |
-| 20% | Texto / estructura | `--clr-dark`, `--clr-dark2`, `--clr-gray` |
-| 10% | Acento (CTA, íconos) | `--clr-accent` |
+## 3. Firma gráfica (lo que se mantiene al re-marcar)
+- **Secciones numeradas solas** (`01`, `02`…) en la etiqueta de cada título. Las cuenta el navegador: al mover o apagar una sección se renumeran.
+- **Cuadrícula tenue** que se desvanece, detrás de la portada y de la llamada (`.bg-grid`).
+- **Cabecera flotante**, baja y translúcida.
+- **El nombre en grande** al fondo del pie, casi invisible y cortado por el borde.
 
-Semánticos derivan por `rgba(var(--rgb-primary), α)`: `--border-soft`, `--border-hover`,
-`--bg-subtle`, `--hero-overlay`, `--shadow-*`. **Regla dura:** cada `--clr-*` con
-transparencias lleva su `--rgb-*` gemelo y se actualizan JUNTOS (drift ya ocurrió aquí una vez).
+## 4. Valores en 3 niveles y temas
+| Nivel | Qué es | Regla |
+|-------|--------|-------|
+| 1 · Primitivos | Marca (`--brand-*`, `--accent-*`), grises `--gray-0…950`, estados, espaciado, esquinas, letra, medidas, capas | Únicos con valores crudos |
+| 2 · Semánticos | Rol en la interfaz: `--clr-bg`, `--clr-surface*`, `--clr-text*`, `--clr-primary`, `--clr-accent`, `--clr-{success,warning,danger}[-bg]`, sombras, `--focus-ring` | Solo `var()` de nivel 1. Uno por tema (claro y oscuro) |
+| 3 · Componente | `--header-*`, `--card-*`, `--btn-radius`, `--grid-line`, `--input-*`, `--popover-*`, `--modal-*`, `--footer-*`, `--tabbar-*`, `--page-pad`, `--section-*` | Solo `var()` de nivel 2 |
 
-> Valores hex viven en `project.css`. Aquí solo roles.
+- **Re-marcar = tocar solo el bloque MARCA del nivel 1** (6 valores). Tinta: `--brand-600` (fondo claro) y `--brand-300` (fondo oscuro). Color de vida: `--accent-600` (fondo del botón, igual en los dos temas, con texto oscuro encima), `--accent-700` (como texto sobre claro) , `--accent-300` (como texto sobre oscuro) y `--accent-on` (texto encima del botón).
+- El color de vida tiene dos papeles: `--clr-accent` (fondos) y `--clr-accent-text` (texto e íconos). Usar el de fondo como texto sobre blanco no se lee bien.
+- Un componente **nunca** usa un primitivo directamente: no cambiaría con el tema.
+- Mezclas con `color-mix(in srgb, …)`. Con `oklch` los grises pierden el tono y salen teñidos de rojo.
+- **Temas:** `system` (por defecto) · `light` · `dark`. El script de `base-head.astro` escribe `data-theme` en `<html>` antes del primer pintado (sin parpadeo) y guarda la elección en el navegador.
+- Fondo claro = blanco puro; las superficies se distinguen por el borde, no por un gris de fondo.
+- Excepciones de valor escrito a mano: el color de la barra del navegador en `base-head.astro` (igual a `--gray-0` / `--gray-950`; sincronizar a mano) y el negro de la máscara de `.bg-grid` (no es un color: marca qué parte se ve).
 
-## 4. Tipografía
-- Familia única: **Montserrat** (`<link>` con preconnect en `Layout1.astro`), fallback `Gill Sans`.
-- Pesos cargados: 300·400·600·700 (300 = H1 del hero).
-- Títulos `h1–h5`: peso 700, UPPERCASE, `letter-spacing: 2px`.
-- Cuerpo `p`: `--clr-dark2`, `.9rem`, `line-height 1.5`.
-- H1 escala a `2rem` en `min-width: 750px`.
-- Caja: UPPERCASE en títulos + botones; sentence case en párrafos; nada de italic.
+## 5. Tipografía
+- **Geist** (títulos y lectura) + **Geist Mono** (etiquetas, fechas, horarios). Dentro del sitio (`public/fonts/`, recortadas por `scripts/fuentes.py`); pesan unos 30 KB entre las dos.
+- Tres papeles en tokens: `--font-display`, `--font-sans`, `--font-mono`. Una marca con más carácter cambia solo `--font-display`.
+- Escala `--text-xs … 4xl`. `4xl` = titular de la portada; `3xl` = título de sección; `lg` = texto destacado.
+- Títulos: peso 600, `--tracking-tight`. Etiquetas: `.eyebrow` (mono, mayúsculas, `--tracking-caps`).
+- `--text-input` (16 px) en campos: evita que el celular acerque la pantalla al escribir.
 
-## 5. Espaciado
-Escala fija en tokens `--space-1..9` = `4·8·12·16·24·32·48·64·96`. Usar solo estos pasos.
-El layout de `global.css` (50px/20px/18px sueltos) es legado — migrar a `--space-*` al tocarlo.
+## 6. Espaciado, esquinas, sombras
+- Espaciado solo `--space-1…9` (4·8·12·16·24·32·48·64·96). Entre secciones: `--section-pad` (más en computador).
+- Ancho de página `--page-max`; ancho de lectura `--text-max`.
+- Esquinas discretas: `sm` controles pequeños · `md` botones y campos · `lg` tarjetas, cabecera y bloques · `pill` solo etiquetas, puntos y el botón flotante.
+- Sombras casi ausentes: `sm` al pasar el mouse · `md` plan destacado · `lg` lo que flota (ventanas, avisos, WhatsApp).
+- Altura de control: `--control-h` (40 px) y `--control-h-sm` (32 px).
 
-## 6. Bordes, radius y sombras
-- Bordes derivados del primario: `--border-soft`, `--border-hover`.
-- Radius: `--radius-sm` (12px, `.button2`, focus) · `--radius-md` (14px, `.button1`/`.boton`).
-- Sombras: `--shadow-sm/md/lg` vía `rgba(var(--rgb-primary), α)`. Sin glow (base sobria).
+## 7. Contratos de componente
+| Componente | Clase / archivo | Regla |
+| ---------- | --------------- | ----- |
+| Título de sección | `components/titulo-seccion.astro` | Línea fina + número + etiqueta + título + texto. **Toda sección empieza así** |
+| Botones | `.btn` + `-primary / -accent / -ghost / -subtle / -danger` + `-sm / -lg / -icon / -block` | Esquina `--btn-radius`. **Un solo `-accent` por bloque**; el resto `-ghost` o `-subtle` |
+| Campo | `.field` > `label` + `.input` / `.textarea` + `.hint` / `.error-text` | Error: `aria-invalid="true"`. Foco con borde + `--focus-ring` |
+| Lista desplegable | `ui/Select.astro` → `<ds-select>` | **Nunca `<select>` del navegador.** `searchable` para listas largas, `creatable` para dejar crear |
+| Fecha | `ui/DatePicker.astro` → `<ds-date>` | **Nunca `<input type="date">`** |
+| Correo / contraseña | `ui/EmailInput.astro` · `ui/PasswordInput.astro` | El correo corrige errores de dedo; la contraseña trae el ojo |
+| Ventana | `ui/Modal.astro` · `window.ui.alert / confirm` | **Nunca las del navegador.** En celular sale desde abajo. `tone: "danger"` para lo que no se puede deshacer |
+| Aviso corto | `window.ui.toast` | Confirmación leve que no pide acción («Guardado») |
+| Menú de acciones | `ui/Menu.astro` → `<ds-menu>` | Acciones secundarias; las peligrosas al final, tras separador |
+| Etiquetas | `.badge` · `.callout` · `.empty` | El color solo comunica estado |
+| Opciones | `.check` · `.switch` · `.segmented` · `.filter-chips` · `.tabs` | Segmented: 2–4 opciones cortas |
+| Cabecera | `components/header.astro` | Flotante, `--header-h`. El desenfoque va en una capa aparte (`::before`): puesto en la cabecera atraparía el menú del celular |
+| Menú del celular | `components/navbar.astro` | Pantalla completa con enlaces grandes y numerados, o barra abajo con `cliente.menuEnBarra` (reserva su alto en `--tabbar-h`) |
+| Portada | `sections/hero.astro` | Etiqueta con punto vivo + titular `4xl` + texto + 2 botones + características en una línea. Entra escalonada |
+| Cifras | `sections/cifras.astro` | Franja entre dos líneas, sin tarjeta |
+| Tarjeta | `.card` + `--card-*` | Borde `--card-border` → `--card-border-hover` + `--shadow-sm`. No se mueve |
+| Celdas | `.cells` | Una sola tarjeta partida (ventajas, misión y visión) |
+| Cuadro de ícono | `.icon-box` (+ `.lg`) | Único lugar para íconos rellenos (`-fill`) |
+| Llamada | `sections/llamada.astro` | Bloque suave (`--clr-primary-bg`) con cuadrícula; sigue el tema. Botón con el color de vida |
+| WhatsApp flotante | `components/whatsapp.astro` | Abre con el mensaje ya escrito. Se esconde con el menú abierto. Se apaga en `cliente.ts` |
+| Pie | `sections/footer.astro` | `--footer-*` (sigue el tema): marca + 3 columnas + línea legal + firma |
+| Aparecer al bajar | `.reveal` | Solo CSS; donde no se soporta, el contenido queda quieto |
 
-## 7. Firma gráfica — Glassmorphism del header
-Header sticky translúcido: `--header-bg-mobile` (.95) → `--header-bg-desktop` (.6) con blur.
-Es el único gesto visual que distingue la base. Aparece en: header. Al re-marcar, mantener.
+**Secciones:** cada una lee sus datos de `cliente.ts` y no se pinta si están vacíos. Ninguna lleva textos del cliente escritos adentro.
 
-## 8. Contratos de componente
-Concepto ↔ clase real ↔ tokens. Sincronizar con el código.
+## 8. Accesibilidad (mínimo AA)
+- Texto secundario (`--clr-text-2`) pasa AA sobre el fondo en los dos temas. Los bordes no se usan como texto.
+- `:focus-visible` global con `--focus-ring`. Enlace «Ir al contenido» al usar el teclado.
+- `prefers-reduced-motion` apaga animaciones, transiciones y desplazamiento suave.
 
-| Componente | Clase | Tokens clave | Regla |
-| ---------- | ----- | ------------ | ----- |
-| CTA primario | `.button1` (+`.boton`) | `--clr-accent`, `--clr-white`, `--shadow-sm` | fondo acento, hover `--clr-accent-hover` + `translateY(-1px)` |
-| Acción alterna | `.button2` | `--clr-gray`, `--clr-primary`, `--clr-white` | borde gris; `.active`/hover invierte a primario |
-| Header | `header .flex-row` | `--header-bg-*`, blur | sticky, glass, logo `logo-png-mini.avif` |
-| Hero | `.hero .flex-column` | `--hero-overlay` | overlay primario .72 sobre imagen |
-| Footer | `footer` | `--footer-hover-bg`, `--clr-primary` | fondo oscuro, links con hover translúcido |
-| Íconos deco | `i.bi-*-fill` | `--clr-accent` | usar variante `-fill` |
-
-## 9. Estados interactivos
-| Elemento | Hover / Focus |
-| -------- | ------------- |
-| `.button1` | `--clr-accent-hover` (acento 80% + blanco), `translateY(-1px)`, `--shadow-sm` |
-| Tarjetas | borde `--border-hover` + `--shadow-sm` |
-| `.button2` | invierte a `--clr-primary` sobre blanco |
-| Link | hereda `--clr-primary` |
-| Foco teclado | `:focus-visible` global → `box-shadow: var(--focus-ring)` (anillo acento 35%) |
-
-Orden CSS obligatorio: base → `@media (hover:hover)` → `@media (min-width)` (skill `css-order`).
-
-## 10. Accesibilidad (mínimo AA)
-- `--clr-dark2` (gris medio) sobre `--clr-white` ≈ 5:1 ✓ AA. Gris `--clr-gray` como
-  texto NO pasa — solo pa bordes/fondos.
-- `:focus-visible` global aplicado (anillo `--focus-ring` sobre acento, visible AA).
-- `prefers-reduced-motion: reduce` neutraliza animaciones/transiciones/scroll suave.
-
-## 11. Checklist do / don't
-**Hacer:** re-marcar tocando solo nivel 1 (`--clr-primary`, `--clr-accent` y sus `--rgb-*`);
-acento solo en CTA/íconos; UPPERCASE en títulos.
-**Evitar:** acento por toda la UI, hex hardcodeado fuera de `:root`, `--rgb-*` desincronizado
-de su `--clr-*`, `style=""` inline, radius/sombra fuera de escala "solo esta vez".
+## 9. Hacer / evitar
+**Hacer:** re-marcar tocando solo MARCA; revisar en claro, oscuro y celular; agregar cada pieza nueva a `/estilos`; empezar cada sección con el título de sección.
+**Evitar:** centrar secciones, títulos en mayúsculas, color de vida por toda la interfaz, cajas dentro de cajas, valores escritos a mano fuera de `project.css`, primitivos dentro de componentes, `style=""`, esquinas o sombras fuera de escala «solo esta vez».
 
 ---
 
 ## Changelog
-Registro fechado de cambios de identidad (fecha absoluta · qué cambió · por qué).
-
-- `2026-08-19` — Creación del DESIGN_SYSTEM.md de la plantilla base. Se documentó identidad
-  neutra, contratos de componente y jerarquía 70/20/10.
-- `2026-08-19` — Fix de drift: `--rgb-primary` (26,26,26→54,54,54) y `--rgb-accent`
-  (154,0,181→72,126,105) no coincidían con sus hex. Rompían sombras/bordes/overlays.
-- `2026-08-19` — Escala de espaciado (`--space-1..9`) y radius (`--radius-sm/md`) a tokens.
-  Botones migrados a `--radius-*`.
-- `2026-08-19` — Accesibilidad: `:focus-visible` global visible (`--focus-ring` subido de 8%
-  primario a 55% acento) + bloque `prefers-reduced-motion`.
-- `2026-10-07` — Paleta por defecto pasa a escala de grises minimalista (primario y acento
-  casi negro, fondo blanco grisáceo, puntos de fondo al 6%). Nuevo `--clr-accent-hover`.
-  Hovers unificados: borde + sombra suave en tarjetas. Fuente sin `@import` y pesos reducidos.
+- `2026-08-19` — Creación del documento. Identidad neutra, contratos y jerarquía 70/20/10. Escala de espaciado y esquinas a tokens. Foco visible y movimiento reducido.
+- `2026-10-07` — Paleta por defecto pasa a escala de grises minimalista.
+- `2026-11-23` — **Cimientos nuevos** (traídos del portal y el inventario de JDT): valores en 3 niveles, tema claro/oscuro, escala de letra, medidas y capas. Se eliminan los `--rgb-*` gemelos (se desincronizaron una vez): todo se deriva con `color-mix`. Letra e íconos dentro del sitio. Página `/estilos`. Astro 5 → 7.
+- `2026-11-23` — **Piezas y secciones** (traídas del portal JDT, Friosystem, Angie, Gym Parra y Wear): sistema `.btn` reemplaza a `.button1 / .button2`; campos, lista desplegable, calendario, ventanas, avisos, etiquetas, pestañas y filtros. Secciones nuevas: cifras, nosotros, ventajas, galería, precios, opiniones, marcas, artículos, preguntas, llamada y contacto. WhatsApp flotante, menú del celular en barra (opcional), páginas de datos, error y mantenimiento, ficha para Google y mapa del sitio.
+- `2026-11-23` — **Rediseño completo** (pedido del usuario: moderno, limpio, compacto, minimalista, elegante). Montserrat → Geist + Geist Mono. Títulos dejan las mayúsculas espaciadas: minúsculas con letras juntas. Todo pasa de centrado a alineado a la izquierda. Fondo blanco puro y líneas finas en vez de cajas. Botones de pastilla a esquina discreta. Cabecera más baja con botón «Escríbenos». Portada nueva con titular propio (`cliente.titular`) y las características adentro (se elimina `caracteristicas.astro`). Pie en columnas. Firma nueva: secciones numeradas, cuadrícula tenue y nombre gigante en el pie; el fondo de puntos deja de ser firma (queda como utilidad).
+- `2026-11-23` — **Color de vida naranja** (pedido del usuario, siguiendo la regla 60 · 30 · 10): antes el acento era la misma tinta. Ahora `--accent-600` con texto oscuro encima, y dos tonos para usarlo como texto. Íconos de tarjeta pasan a tinta para no gastar el acento. Preguntas frecuentes: título y lista en la misma fila (antes quedaba un hueco a la izquierda). Pie: marca a un lado y columnas que se acomodan solas. Rejillas de tarjetas bajan a 200 px de mínimo para que en tableta no quede una tarjeta suelta.
+- `2026-11-23` — **Color de vida: verde lima** (elegido por el usuario entre naranja, azul cobalto, lima, turquesa y rosa). Nuevo `--accent-on`: el texto que va encima del botón, para que cada marca decida si es oscuro o blanco. La llamada «¿Hablamos?» deja de ser negra en tema claro (el usuario lo vio como un error): ahora sigue el tema.
+- `2026-11-23` — El pie deja de ser negro en tema claro (pedido del usuario, igual que la llamada): ahora sigue el tema. Se eliminan `--clr-inverse` / `--clr-on-inverse`.

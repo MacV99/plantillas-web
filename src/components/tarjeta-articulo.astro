@@ -1,0 +1,64 @@
+---
+// Tarjeta de un artículo (lista de artículos y sección del inicio).
+import { fechaLarga } from "../lib/articulos";
+
+interface Props {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  fecha: Date;
+  tema?: string;
+  borrador?: boolean;
+}
+
+const { id, titulo, descripcion, fecha, tema, borrador } = Astro.props;
+---
+
+<a class="card articulo flex-column reveal" href={`/articulos/${id}`}>
+  <span class="meta">
+    {tema && <span class="eyebrow">{tema}</span>}
+    {borrador && <span class="badge warning">Borrador</span>}
+  </span>
+  <h3>{titulo}</h3>
+  <p>{descripcion}</p>
+  <span class="pie flex-row">
+    <span class="muted small">{fechaLarga(fecha)}</span>
+    <span class="link small">Leer <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
+  </span>
+</a>
+
+<style>
+  .articulo {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--space-2);
+    height: 100%;
+    padding: var(--card-pad);
+    box-shadow: none;
+    color: var(--clr-text);
+    transition: var(--transition);
+  }
+
+  h3 {
+    color: var(--clr-primary);
+  }
+
+  .pie {
+    justify-content: space-between;
+    gap: var(--space-3);
+    width: 100%;
+    margin-top: auto;
+    padding-top: var(--space-3);
+  }
+
+  @media (hover: hover) {
+    .articulo:hover {
+      border-color: var(--card-border-hover);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .articulo:hover .bi-arrow-right {
+      transform: translateX(3px);
+    }
+  }
+</style>

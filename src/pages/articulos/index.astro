@@ -1,0 +1,51 @@
+---
+import Layout1 from "../../layouts/Layout1.astro";
+import TituloSeccion from "../../components/titulo-seccion.astro";
+import TarjetaArticulo from "../../components/tarjeta-articulo.astro";
+import { articulosVisibles } from "../../lib/articulos";
+import { cliente } from "../../data/cliente";
+
+const articulos = await articulosVisibles();
+---
+
+<Layout1 title="Artículos" description={`Artículos de ${cliente.nombre}.`} oculta={articulos.length === 0}>
+  <section>
+    <TituloSeccion {...cliente.articulos.encabezado} />
+
+    {
+      articulos.length > 0 ? (
+        <ul class="lista">
+          {articulos.map(({ id, data }) => (
+            <li>
+              <TarjetaArticulo id={id} {...data} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty">
+          <i class="bi bi-journal-text" aria-hidden="true" />
+          <p>Aún no hay artículos.</p>
+          <a class="btn btn-ghost btn-sm" href="/">Ir al inicio</a>
+        </div>
+      )
+    }
+  </section>
+</Layout1>
+
+<style>
+  .lista {
+    display: grid;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .empty {
+    width: 100%;
+  }
+
+  @media (min-width: 750px) {
+    .lista {
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,112 @@
+---
+import TituloSeccion from "../components/titulo-seccion.astro";
+import { cliente } from "../data/cliente";
+
+const { encabezado, planes } = cliente.precios;
+---
+
+{
+  planes.length > 0 && (
+    <section id="precios">
+      <TituloSeccion {...encabezado} />
+
+      <ul class="planes">
+        {planes.map(({ nombre, precio, detalle, incluye, destacado }) => (
+          <li class:list={["card", "plan", "flex-column", "reveal", { destacado }]}>
+            {destacado && <span class="badge primary">Más elegido</span>}
+            <h3>{nombre}</h3>
+            <p class="precio tnum">
+              {precio || "Consultar"}
+              {precio && detalle && <small>{detalle}</small>}
+            </p>
+            <ul class="flex-column">
+              {incluye.map((item) => (
+                <li class="flex-row">
+                  <i class="bi bi-check2" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a class:list={["btn", "btn-block", destacado ? "btn-accent" : "btn-ghost"]} href={cliente.whatsapp} target="_blank" rel="noopener">
+              Lo quiero
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .planes {
+    display: grid;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .plan {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    padding: var(--card-pad);
+    box-shadow: none;
+  }
+
+  /* La etiqueta va en la esquina: así los títulos de todos los planes quedan a la misma altura */
+  .plan .badge {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+  }
+
+  .plan.destacado {
+    position: relative;
+    border-color: var(--clr-primary);
+    box-shadow: var(--shadow-md);
+  }
+
+  h3 {
+    color: var(--clr-primary);
+  }
+
+  .precio {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--clr-text);
+  }
+
+  small {
+    margin-left: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--clr-text-muted);
+  }
+
+  .plan ul {
+    align-items: flex-start;
+    gap: var(--space-2);
+    width: 100%;
+    margin-bottom: auto;
+    padding-block: var(--space-3);
+    border-top: solid 1px var(--clr-border);
+  }
+
+  .plan ul li {
+    justify-content: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--clr-text-2);
+  }
+
+  .plan ul i {
+    color: var(--clr-success);
+  }
+
+  @media (min-width: 750px) {
+    .planes {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      align-items: stretch;
+    }
+  }
+</style>

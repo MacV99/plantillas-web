@@ -1,0 +1,93 @@
+---
+import TituloSeccion from "../components/titulo-seccion.astro";
+import { cliente } from "../data/cliente";
+
+const { encabezado, lista } = cliente.testimonios;
+// Iniciales para el círculo: «Nombre Apellido» → «NA»
+const iniciales = (nombre: string) =>
+  nombre
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+---
+
+{
+  lista.length > 0 && (
+    <section id="opiniones">
+      <TituloSeccion {...encabezado} />
+
+      <ul class="opiniones">
+        {lista.map(({ nombre, cargo, texto }) => (
+          <li class="card opinion flex-column reveal">
+            <i class="bi bi-quote" aria-hidden="true" />
+            <blockquote>{texto}</blockquote>
+            <div class="autor flex-row">
+              <span class="avatar flex-row" aria-hidden="true">{iniciales(nombre)}</span>
+              <div class="flex-column">
+                <strong>{nombre}</strong>
+                {cargo && <span class="muted small">{cargo}</span>}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .opiniones {
+    display: grid;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .opinion {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    padding: var(--card-pad);
+    box-shadow: none;
+  }
+
+  .opinion > i {
+    font-size: var(--text-2xl);
+    color: var(--clr-accent-text);
+  }
+
+  blockquote {
+    margin-bottom: auto;
+    color: var(--clr-text-2);
+  }
+
+  .autor {
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
+
+  .avatar {
+    flex-shrink: 0;
+    width: var(--control-h);
+    height: var(--control-h);
+    background-color: var(--clr-primary-bg);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--clr-primary);
+  }
+
+  .autor div {
+    align-items: flex-start;
+  }
+
+  strong {
+    font-size: var(--text-sm);
+  }
+
+  @media (min-width: 750px) {
+    .opiniones {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+</style>

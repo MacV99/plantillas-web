@@ -1,14 +1,36 @@
 ---
+// Inicio. El orden de las secciones es el de esta lista: mover una línea = mover la sección.
+// Para apagar una sección: vaciar sus datos en cliente.ts (desaparece sola) o borrar su línea aquí.
 import Layout1 from "../layouts/Layout1.astro";
 import Hero from "../sections/hero.astro";
+import Cifras from "../sections/cifras.astro";
 import Servicios from "../sections/servicios.astro";
-import Caracteristicas from "../components/caracteristicas.astro";
+import Nosotros from "../sections/nosotros.astro";
+import Ventajas from "../sections/ventajas.astro";
 import MisionVision from "../components/mision-vision.astro";
+import Galeria from "../sections/galeria.astro";
+import Precios from "../sections/precios.astro";
+import Testimonios from "../sections/testimonios.astro";
+import Marcas from "../sections/marcas.astro";
+import Articulos from "../sections/articulos.astro";
+import Preguntas from "../sections/preguntas.astro";
+import Llamada from "../sections/llamada.astro";
+import Contacto from "../sections/contacto.astro";
 ---
 
 <Layout1>
   <Hero />
+  <Cifras />
   <Servicios />
-  <Caracteristicas />
+  <Nosotros />
+  <Ventajas />
   <MisionVision />
+  <Galeria />
+  <Precios />
+  <Testimonios />
+  <Marcas />
+  <Articulos />
+  <Preguntas />
+  <Llamada />
+  <Contacto />
 </Layout1>

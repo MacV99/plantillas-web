@@ -1,0 +1,100 @@
+---
+// Política de tratamiento de datos (Colombia, Ley 1581 de 2012). Texto base: los datos salen de cliente.ts.
+// OJO: es un punto de partida. Antes de publicar, el cliente debe revisarlo con quien le lleve lo legal.
+import Layout1 from "../layouts/Layout1.astro";
+import { cliente } from "../data/cliente";
+
+const { legal } = cliente;
+---
+
+<Layout1 title="Tratamiento de datos" description={`Política de tratamiento de datos personales de ${cliente.nombre}.`}>
+  <section class="legal">
+    <header class="flex-column">
+      <span class="eyebrow">Legal</span>
+      <h1>Tratamiento de datos personales</h1>
+      <p class="muted small">Vigente desde el {legal.vigencia}</p>
+    </header>
+
+    <article class="flex-column">
+      <h2>1. Responsable</h2>
+      <p>
+        {legal.razonSocial}, NIT {legal.nit}, con domicilio en {cliente.direccion}, {cliente.ciudad}, {cliente.region}. Correo: <a class="link" href={`mailto:${cliente.correo}`}>{cliente.correo}</a>. Teléfono: {cliente.telefono}.
+      </p>
+
+      <h2>2. Marco legal</h2>
+      <p>Esta política se rige por la Ley 1581 de 2012, el Decreto 1377 de 2013 y las normas que los complementan.</p>
+
+      <h2>3. Datos que se recogen</h2>
+      <p>Solo los que la persona entrega al escribirnos o al contratar un servicio: nombre, teléfono, correo y los datos necesarios para atender su solicitud. Este sitio no pide datos sensibles.</p>
+
+      <h2>4. Para qué se usan</h2>
+      <ul>
+        <li>Responder mensajes y solicitudes.</li>
+        <li>Prestar el servicio contratado y dar soporte.</li>
+        <li>Enviar información sobre nuestros servicios, solo si la persona lo autoriza.</li>
+        <li>Cumplir obligaciones legales y contables.</li>
+      </ul>
+
+      <h2>5. Sus derechos</h2>
+      <ul>
+        <li>Conocer, actualizar y corregir sus datos.</li>
+        <li>Pedir prueba de la autorización que nos dio.</li>
+        <li>Saber qué uso se les ha dado.</li>
+        <li>Retirar la autorización o pedir que se borren, cuando no haya un deber legal de conservarlos.</li>
+        <li>Presentar quejas ante la Superintendencia de Industria y Comercio.</li>
+      </ul>
+
+      <h2>6. Cómo ejercer sus derechos</h2>
+      <p>
+        Escriba a <a class="link" href={`mailto:${cliente.correo}`}>{cliente.correo}</a> con su nombre, lo que solicita y un dato de contacto. Las consultas se responden en máximo 10 días hábiles y los reclamos en máximo 15 días hábiles.
+      </p>
+
+      <h2>7. Seguridad</h2>
+      <p>Los datos se guardan con las medidas necesarias para evitar su pérdida, uso o acceso no autorizado, y no se venden ni se ceden a terceros.</p>
+
+      <h2>8. Este sitio</h2>
+      <p>El sitio no usa cookies de publicidad. Si tiene contador de visitas, es anónimo y no identifica a las personas.</p>
+
+      <h2>9. Vigencia</h2>
+      <p>Esta política rige desde el {legal.vigencia}. Los datos se conservan mientras dure la relación con la persona y el tiempo que exija la ley.</p>
+    </article>
+  </section>
+</Layout1>
+
+<style>
+  .legal {
+    align-items: stretch;
+    gap: var(--space-6);
+    max-width: 760px;
+  }
+
+  header {
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+  }
+
+  article {
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  h2 {
+    margin-top: var(--space-4);
+    font-size: var(--text-md);
+    color: var(--clr-primary);
+  }
+
+  ul {
+    padding-left: var(--space-5);
+    list-style: disc;
+    color: var(--clr-text-2);
+  }
+
+  li + li {
+    margin-top: var(--space-1);
+  }
+</style>

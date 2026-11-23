@@ -1,84 +1,68 @@
 ---
+import TituloSeccion from "../components/titulo-seccion.astro";
 import { cliente } from "../data/cliente";
+
+const { encabezado, lista } = cliente.servicios;
 ---
 
-<section id="servicios">
-  <h2>Servicios</h2>
-  <p class="intro">Lo que hacemos por ti.</p>
+{
+  lista.length > 0 && (
+    <section id="servicios">
+      <TituloSeccion {...encabezado} />
 
-  <ul class="grid">
-    {
-      cliente.servicios.map(({ icono, titulo, texto, imagen }) => (
-        <li class="card flex-column">
-          {imagen ? (
-            <img src={imagen} alt={titulo} width="400" height="240" loading="lazy" />
-          ) : (
-            <i class={`bi ${icono}`} aria-hidden="true" />
-          )}
-          <h3>{titulo}</h3>
-          <p>{texto}</p>
-        </li>
-      ))
-    }
-  </ul>
-</section>
+      <ul class="grid">
+        {lista.map(({ icono, titulo, texto, imagen }) => (
+          <li class="card tarjeta flex-column reveal">
+            {imagen ? <img src={imagen} alt={titulo} width="400" height="240" loading="lazy" /> : <i class={`bi ${icono} icon-box lg`} aria-hidden="true" />}
+            <h3>{titulo}</h3>
+            <p>{texto}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
 
 <style>
-  .intro {
-    margin-top: -10px;
-    text-align: center;
-  }
-
   .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: var(--space-4);
     width: 100%;
   }
 
-  .card {
+  .tarjeta {
     align-items: flex-start;
-    gap: 10px;
-    padding: 24px 20px;
-    background-color: var(--clr-white);
-    border: solid 1px var(--border-soft);
-    border-radius: var(--radius-md);
+    justify-content: flex-start;
+    gap: var(--space-3);
+    padding: var(--card-pad);
+    box-shadow: none;
     transition: var(--transition);
   }
 
-  .card i {
-    width: 44px;
-    height: 44px;
-    font-size: 1.3rem;
-    color: var(--clr-accent);
-    background-color: var(--bg-subtle);
-    border-radius: var(--radius-sm);
-  }
-
-  .card img {
+  img {
     width: 100%;
     height: auto;
     aspect-ratio: 5 / 3;
     object-fit: cover;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
   }
 
   h3 {
-    font-size: 0.95rem;
     color: var(--clr-primary);
   }
 
+  /* La tarjeta se queda quieta: solo cambian borde y sombra */
   @media (hover: hover) {
-    .card:hover {
-      border-color: var(--border-hover);
+    .tarjeta:hover {
+      border-color: var(--card-border-hover);
       box-shadow: var(--shadow-sm);
-      transform: translateY(-2px);
     }
   }
 
   @media (min-width: 750px) {
     .grid {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
   }
 </style>

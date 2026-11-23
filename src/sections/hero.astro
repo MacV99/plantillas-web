@@ -1,48 +1,131 @@
 ---
+// Portada: etiqueta, frase grande, texto de apoyo, dos botones y las características en una línea.
 import { cliente } from "../data/cliente";
 ---
 
-<section class="flex-column bg-dots">
-  <h1>{cliente.nombre}</h1>
-  <p>{cliente.descripcion}</p>
-  <div class="buttons flex-row">
-    <a class="button1" href={cliente.whatsapp} target="_blank" rel="noopener">
-      <i class="bi bi-whatsapp"></i>Contáctanos
-    </a>
-    <a class="button2" href="#servicios">Saber más</a>
+<section class="hero bg-grid">
+  <div class="contenido flex-column">
+    {
+      cliente.etiqueta && (
+        <span class="eyebrow flex-row">
+          <span class="punto" aria-hidden="true" />
+          {cliente.etiqueta}
+        </span>
+      )
+    }
+    <h1>{cliente.titular || cliente.nombre}</h1>
+    <p>{cliente.descripcion}</p>
+    <div class="botones flex-row">
+      <a class="btn btn-accent btn-lg" href={cliente.whatsapp} target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>Contáctanos
+      </a>
+      <a class="btn btn-ghost btn-lg" href="#servicios">Ver servicios <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+    </div>
+    {
+      cliente.caracteristicas.length > 0 && (
+        <ul class="caracteristicas flex-row">
+          {cliente.caracteristicas.map((texto) => (
+            <li class="flex-row">
+              <i class="bi bi-check2" aria-hidden="true" />
+              {texto}
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </section>
 
 <style>
-  section {
-    text-align: center;
-    border-bottom: solid 1px var(--border-soft);
-    min-height: 300px;
-    gap: 8px;
+  .hero {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-7);
+  }
+
+  .contenido {
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .eyebrow {
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    background-color: var(--clr-surface);
+    border: solid 1px var(--clr-border);
+    border-radius: var(--radius-pill);
+  }
+
+  /* Punto vivo: dice «estamos atendiendo» sin escribirlo */
+  .punto {
+    width: 6px;
+    height: 6px;
+    background-color: var(--clr-accent);
+    border-radius: var(--radius-pill);
   }
 
   h1 {
-    font-size: 2.8rem;
-    line-height: normal;
-    font-weight: 300;
-    letter-spacing: 18px;
-    padding-left: 18px;
-    color: var(--clr-primary);
+    max-width: 16ch;
+    font-size: var(--text-4xl);
+    line-height: 1;
+    letter-spacing: -0.045em;
   }
 
   p {
-    font-size: 0.95rem;
+    max-width: 52ch;
+    font-size: var(--text-lg);
   }
 
-  .buttons {
+  .botones {
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 6px;
+    justify-content: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .caracteristicas {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: var(--space-2) var(--space-5);
+    margin-top: var(--space-4);
+    color: var(--clr-text-2);
+    font-size: var(--text-sm);
+  }
+
+  .caracteristicas li {
+    gap: var(--space-2);
+  }
+
+  .caracteristicas i {
+    color: var(--clr-accent-text);
+  }
+
+  /* Entrada: cada renglón sube un poco después del anterior */
+  @media (prefers-reduced-motion: no-preference) {
+    .contenido > * {
+      animation: fadeInUp 0.6s var(--ease) both;
+    }
+
+    .contenido > :nth-child(2) {
+      animation-delay: 0.06s;
+    }
+
+    .contenido > :nth-child(3) {
+      animation-delay: 0.12s;
+    }
+
+    .contenido > :nth-child(4) {
+      animation-delay: 0.18s;
+    }
+
+    .contenido > :nth-child(5) {
+      animation-delay: 0.24s;
+    }
   }
 
   @media (min-width: 750px) {
-    h1 {
-      font-size: 5rem;
+    .hero {
+      padding-top: var(--space-9);
+      padding-bottom: var(--space-8);
     }
   }
 </style>

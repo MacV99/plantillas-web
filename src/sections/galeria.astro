@@ -1,0 +1,126 @@
+---
+import TituloSeccion from "../components/titulo-seccion.astro";
+import { cliente } from "../data/cliente";
+
+const { encabezado, fotos } = cliente.galeria;
+---
+
+{
+  fotos.length > 0 && (
+    <section id="galeria">
+      <TituloSeccion {...encabezado} />
+
+      <ul class="fotos">
+        {fotos.map(({ imagen, texto }) => (
+          <li class="reveal">
+            <button type="button" data-foto={imagen} data-texto={texto} aria-label={`Ver en grande: ${texto}`}>
+              <img src={imagen} alt={texto} width="400" height="300" loading="lazy" />
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <dialog class="visor" id="visor-galeria" aria-label="Foto en grande">
+        <img src="" alt="" />
+        <button type="button" class="btn btn-ghost btn-icon cerrar" aria-label="Cerrar">
+          <i class="bi bi-x-lg" aria-hidden="true" />
+        </button>
+      </dialog>
+    </section>
+  )
+}
+
+<script>
+  // Foto en grande: se cierra tocando cualquier parte o con Esc
+  const visor = document.getElementById("visor-galeria") as HTMLDialogElement | null;
+  const grande = visor?.querySelector("img");
+
+  document.querySelectorAll<HTMLButtonElement>("[data-foto]").forEach((boton) =>
+    boton.addEventListener("click", () => {
+      if (!visor || !grande) return;
+      grande.src = boton.dataset.foto!;
+      grande.alt = boton.dataset.texto ?? "";
+      visor.showModal();
+    }),
+  );
+
+  visor?.addEventListener("click", () => visor.close());
+</script>
+
+<style>
+  .fotos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    width: 100%;
+  }
+
+  .fotos button {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border: solid 1px var(--card-border);
+    border-radius: var(--radius-md);
+    cursor: zoom-in;
+  }
+
+  .fotos img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .visor {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    padding: var(--space-4);
+    background-color: transparent;
+    border: 0;
+    cursor: zoom-out;
+  }
+
+  .visor[open] {
+    display: grid;
+    place-items: center;
+    animation: fadeIn 0.18s var(--ease);
+  }
+
+  .visor::backdrop {
+    background-color: var(--modal-backdrop);
+    backdrop-filter: blur(6px);
+  }
+
+  .visor img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(100dvh - var(--space-4) * 2);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    object-fit: contain;
+  }
+
+  .cerrar {
+    position: fixed;
+    top: var(--space-3);
+    right: var(--space-3);
+  }
+
+  /* El marco se queda quieto: solo se mueve la imagen de adentro */
+  @media (hover: hover) {
+    .fotos button:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (min-width: 750px) {
+    .fotos {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+  }
+</style>

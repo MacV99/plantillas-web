@@ -1,57 +1,57 @@
 ---
+// Misión y visión en una sola tarjeta partida en dos. Texto vacío en cliente.ts = no aparece.
 import { cliente } from "../data/cliente";
 
 const bloques = [
-  { icono: "bi-bullseye", titulo: "Nuestra misión", texto: cliente.mision },
-  { icono: "bi-lightbulb-fill", titulo: "Nuestra visión", texto: cliente.vision },
-];
+  { titulo: "Misión", texto: cliente.mision },
+  { titulo: "Visión", texto: cliente.vision },
+].filter(({ texto }) => texto);
 ---
 
-<section class="flex-row">
-  {
-    bloques.map(({ icono, titulo, texto }) => (
-      <div class="flex-column bg-dots">
-        <h2 class="flex-row">
-          <i class={`bi ${icono}`} />
-          {titulo}
-        </h2>
-        <p>{texto}</p>
+{
+  bloques.length > 0 && (
+    <section class="mision">
+      <div class="cells reveal">
+        {bloques.map(({ titulo, texto }) => (
+          <div class="flex-column">
+            <span class="eyebrow">{titulo}</span>
+            <p>{texto}</p>
+          </div>
+        ))}
       </div>
-    ))
-  }
-</section>
+    </section>
+  )
+}
 
 <style>
-  section {
-    flex-wrap: wrap;
-    align-items: stretch;
+  .mision {
+    padding-block: var(--space-5);
   }
 
-  div {
+  .cells {
+    box-shadow: none;
+  }
+
+  .cells > div {
     align-items: flex-start;
     justify-content: flex-start;
-    border: solid 1px var(--border-soft);
-    padding: 27px 20px;
-    border-radius: 18px;
-    max-width: 400px;
-    gap: 5px;
-    transition: var(--transition);
+    gap: var(--space-3);
+    padding: var(--space-5);
   }
 
-  h2 {
-    gap: 6px;
-    font-size: 1.1rem;
-    color: var(--clr-primary);
+  p {
+    color: var(--clr-text);
+    font-size: var(--text-lg);
+    letter-spacing: -0.01em;
   }
 
-  i {
-    color: var(--clr-accent);
-  }
+  @media (min-width: 750px) {
+    .cells {
+      --cells: 2;
+    }
 
-  @media (hover: hover) {
-    div:hover {
-      border-color: var(--border-hover);
-      box-shadow: var(--shadow-sm);
+    .cells > div {
+      padding: var(--space-6);
     }
   }
 </style>

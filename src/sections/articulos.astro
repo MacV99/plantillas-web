@@ -1,0 +1,46 @@
+---
+// Últimos artículos en el inicio. Sin artículos publicados, la sección no aparece.
+import TituloSeccion from "../components/titulo-seccion.astro";
+import TarjetaArticulo from "../components/tarjeta-articulo.astro";
+import { articulosVisibles } from "../lib/articulos";
+import { cliente } from "../data/cliente";
+
+const ultimos = (await articulosVisibles()).slice(0, 3);
+---
+
+{
+  ultimos.length > 0 && (
+    <section id="articulos">
+      <TituloSeccion {...cliente.articulos.encabezado} />
+
+      <ul class="lista">
+        {ultimos.map(({ id, data }) => (
+          <li>
+            <TarjetaArticulo id={id} {...data} />
+          </li>
+        ))}
+      </ul>
+
+      <a class="btn btn-ghost" href="/articulos">Ver todos <i class="bi bi-arrow-right" aria-hidden="true" /></a>
+    </section>
+  )
+}
+
+<style>
+  .lista {
+    display: grid;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .btn {
+    align-self: flex-start;
+    margin-inline: max(0px, (100% - var(--page-max)) / 2);
+  }
+
+  @media (min-width: 750px) {
+    .lista {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+</style>

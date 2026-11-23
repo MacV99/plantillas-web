@@ -1,86 +1,169 @@
 ---
+// Pie: sigue el tema (gris muy suave en claro, oscuro en oscuro). Arriba la marca y las columnas; abajo el nombre en grande como firma.
 import { cliente } from "../data/cliente";
 
 const year = new Date().getFullYear();
+const tel = cliente.telefono.replace(/\s/g, "");
 ---
 
-<footer class="flex-column" id="contacto">
-  <img src="/img/logo-png.avif" alt={`Logo ${cliente.nombre}`} class="logo" width="80" height="80" loading="lazy" />
-  <h3>{cliente.nombre}</h3>
+<footer>
+  <div class="arriba">
+    <div class="marca flex-column">
+      <a href="/" class="flex-row" aria-label={`${cliente.nombre}: inicio`}>
+        <img src="/img/logo.svg" alt="" width="36" height="36" loading="lazy" />
+        <strong>{cliente.nombre}</strong>
+      </a>
+      <p>{cliente.descripcion}</p>
+    </div>
 
-  <div class="contact-info flex-column">
-    <a class="flex-row" href={`tel:${cliente.telefono.replace(/\s/g, "")}`}><i class="bi bi-telephone-fill"></i>{cliente.telefono}</a>
-    <a class="flex-row" href={`mailto:${cliente.correo}`}><i class="bi bi-envelope-fill"></i>{cliente.correo}</a>
-    <p class="flex-row"><i class="bi bi-geo-alt-fill"></i>{cliente.ciudad}</p>
+    <div class="columnas">
+    <nav class="columna flex-column" aria-label="Menú del pie">
+      <span class="eyebrow">Menú</span>
+      {cliente.menu.map(({ texto, url }) => <a href={url}>{texto}</a>)}
+    </nav>
+
+    <div class="columna flex-column">
+      <span class="eyebrow">Contacto</span>
+      <a href={`tel:${tel}`}>{cliente.telefono}</a>
+      <a href={`mailto:${cliente.correo}`}>{cliente.correo}</a>
+      <span>{cliente.ciudad}, {cliente.region}</span>
+    </div>
+
+    <div class="columna flex-column">
+      <span class="eyebrow">Redes</span>
+      {
+        cliente.redes.map(({ nombre, icono, url }) => (
+          <a class="flex-row" href={url} target="_blank" rel="noopener">
+            <i class={`bi ${icono}`} aria-hidden="true" />
+            {nombre}
+          </a>
+        ))
+      }
+    </div>
+    </div>
   </div>
 
-  <div class="flex-row follow">
-    {
-      cliente.redes.map(({ nombre, icono, url }) => (
-        <a href={url} aria-label={nombre} target="_blank" rel="noopener">
-          <i class={`bi ${icono}`} />
-        </a>
-      ))
-    }
+  <div class="abajo flex-row">
+    <small>© {year} {cliente.nombre}</small>
+    <small><a href="/privacidad">Tratamiento de datos</a></small>
   </div>
 
-  <small>©{year} {cliente.nombre}</small>
+  <p class="firma" aria-hidden="true" data-texto={cliente.nombre}></p>
 </footer>
 
 <style>
   footer {
-    background-color: var(--clr-dark);
-    background-image: radial-gradient(circle, var(--footer-dots) 1px, transparent 1px);
-    background-size: 22px 22px;
-    margin-top: auto;
-    color: var(--clr-white);
-    padding-bottom: 20px;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-7);
+    padding-bottom: calc(var(--space-5) + var(--tabbar-h));
+    overflow: hidden;
+    background-color: var(--footer-bg);
+    border-top: solid 1px var(--clr-border);
+    color: var(--footer-fg);
   }
 
-  .logo {
-    width: 80px;
-    height: 80px;
-    margin-top: -80px;
-    border-radius: 10px;
+  .arriba {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  /* Las columnas se acomodan solas según el ancho (1, 2 o 3 por fila) */
+  .columnas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-6) var(--space-5);
+  }
+
+  .marca {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
+
+  .marca a {
+    gap: var(--space-3);
+    color: var(--footer-fg);
+    font-size: var(--text-lg);
+    letter-spacing: -0.02em;
+  }
+
+  .marca img {
+    width: 36px;
+    height: 36px;
     object-fit: contain;
   }
 
-  h3 {
-    color: var(--clr-white);
-  }
-
-  .contact-info {
-    gap: 6px;
-  }
-
-  .contact-info > * {
-    gap: 8px;
-    font-size: 0.9rem;
-    color: var(--clr-white);
-  }
-
-  .follow {
-    border: solid 1px var(--footer-border);
-    border-radius: 50px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-  }
-
-  .follow i {
-    font-size: 26px;
-    color: var(--clr-white);
-    padding: 16px 22px;
-    transition: var(--transition);
-  }
-
-  small {
+  .marca p {
+    max-width: 38ch;
     color: var(--footer-muted);
-    font-size: 0.75rem;
+  }
+
+  .columna {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .columna .eyebrow {
+    margin-bottom: var(--space-1);
+    color: var(--footer-muted);
+  }
+
+  .columna a,
+  .columna span:not(.eyebrow) {
+    gap: var(--space-2);
+    color: var(--footer-fg);
+    overflow-wrap: anywhere;
+  }
+
+  .abajo {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    padding-top: var(--space-4);
+    border-top: solid 1px var(--footer-border);
+  }
+
+  small,
+  small a {
+    color: var(--footer-muted);
+    font-size: var(--text-xs);
+  }
+
+  /* Firma: el nombre en grande, casi invisible, cortado por el borde de abajo.
+     Es adorno: se pinta desde el atributo para que no cuente como texto repetido de la página */
+  .firma::before {
+    content: attr(data-texto);
+  }
+
+  .firma {
+    margin-bottom: calc(var(--space-7) * -1);
+    color: var(--footer-hover-bg);
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 15vw, 11rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+    user-select: none;
   }
 
   @media (hover: hover) {
-    .follow i:hover {
-      background-color: var(--footer-hover-bg);
+    .columna a:hover,
+    small a:hover {
+      color: var(--footer-fg);
+      text-decoration: underline;
     }
   }
+
+  /* Computador: la marca a la izquierda y las columnas a la derecha */
+  @media (min-width: 750px) {
+    .arriba {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: var(--space-7);
+    }
+  }
+
 </style>

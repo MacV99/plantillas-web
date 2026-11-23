@@ -1,0 +1,67 @@
+---
+import { cliente } from "../data/cliente";
+
+const { ventajas } = cliente;
+---
+
+{
+  ventajas.length > 0 && (
+    <section class="ventajas">
+      <ul class="cells">
+        {ventajas.map(({ icono, titulo, texto }) => (
+          <li class="flex-row">
+            <i class={`bi ${icono}`} aria-hidden="true" />
+            <div class="flex-column">
+              <strong>{titulo}</strong>
+              <span>{texto}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .ventajas {
+    padding-block: var(--space-5);
+  }
+
+  ul {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  li {
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
+
+  i {
+    flex-shrink: 0;
+    font-size: var(--text-2xl);
+    color: var(--clr-text);
+  }
+
+  div {
+    align-items: flex-start;
+  }
+
+  strong {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  span {
+    font-size: var(--text-sm);
+    color: var(--clr-text-muted);
+  }
+
+  @media (min-width: 750px) {
+    ul {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+    }
+  }
+</style>

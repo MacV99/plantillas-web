@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Foto de ejemplo">
+  <defs>
+    <pattern id="p" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#8a8b90" fill-opacity=".35"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="#8a8b90" fill-opacity=".18"/>
+  <rect width="800" height="600" fill="url(#p)"/>
+  <g fill="none" stroke="#8a8b90" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="300" y="220" width="200" height="160" rx="18"/>
+    <circle cx="352" cy="272" r="18"/>
+    <path d="M300 350l62-58 48 44 34-30 56 50"/>
+  </g>
+</svg>

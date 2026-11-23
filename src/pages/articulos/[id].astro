@@ -1,0 +1,114 @@
+---
+import { render } from "astro:content";
+import Layout1 from "../../layouts/Layout1.astro";
+import { articulosVisibles, fechaLarga } from "../../lib/articulos";
+import { cliente } from "../../data/cliente";
+
+export async function getStaticPaths() {
+  const articulos = await articulosVisibles();
+  return articulos.map((articulo) => ({ params: { id: articulo.id }, props: { articulo } }));
+}
+
+const { articulo } = Astro.props;
+const { titulo, descripcion, fecha, tema, borrador } = articulo.data;
+const { Content } = await render(articulo);
+---
+
+<Layout1 title={titulo} description={descripcion} oculta={borrador}>
+  <section>
+    <article class="articulo flex-column">
+      <a class="link small" href="/articulos"><i class="bi bi-arrow-left" aria-hidden="true"></i> Artículos</a>
+      {borrador && <div class="callout warning"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i><div>Borrador: no se publica hasta poner <code>borrador: false</code>.</div></div>}
+      <span class="eyebrow">{tema ? `${tema} · ` : ""}{fechaLarga(fecha)}</span>
+      <h1>{titulo}</h1>
+      <p class="bajada">{descripcion}</p>
+
+      <div class="cuerpo">
+        <Content />
+      </div>
+
+      <div class="cierre flex-row">
+        <span class="muted small">Por {cliente.nombre}</span>
+        <a class="btn btn-accent btn-sm" href={cliente.whatsapp} target="_blank" rel="noopener">
+          <i class="bi bi-whatsapp" aria-hidden="true"></i>Escríbenos
+        </a>
+      </div>
+    </article>
+  </section>
+</Layout1>
+
+<style>
+  .articulo {
+    align-items: flex-start;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 720px;
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .bajada {
+    font-size: var(--text-lg);
+  }
+
+  /* El texto del artículo llega ya armado: sus etiquetas no reciben estilos de este bloque sin :global */
+  .cuerpo {
+    width: 100%;
+    padding-block: var(--space-4);
+    border-block: solid 1px var(--clr-border);
+  }
+
+  .cuerpo :global(* + *) {
+    margin-top: var(--space-3);
+  }
+
+  .cuerpo :global(h2),
+  .cuerpo :global(h3) {
+    margin-top: var(--space-5);
+    font-size: var(--text-md);
+    color: var(--clr-primary);
+  }
+
+  .cuerpo :global(ul),
+  .cuerpo :global(ol) {
+    padding-left: var(--space-5);
+    color: var(--clr-text-2);
+  }
+
+  .cuerpo :global(ul) {
+    list-style: disc;
+  }
+
+  .cuerpo :global(ol) {
+    list-style: decimal;
+  }
+
+  .cuerpo :global(li + li) {
+    margin-top: var(--space-1);
+  }
+
+  .cuerpo :global(a) {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .cuerpo :global(code) {
+    padding: 0 var(--space-1);
+    background-color: var(--clr-surface-sunken);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+  }
+
+  .cuerpo :global(img) {
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .cierre {
+    justify-content: space-between;
+    gap: var(--space-3);
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+// Preguntas frecuentes: lista de líneas finas que se abren. Sin tarjetas.
+// Computador: el título queda a la izquierda y la lista a la derecha, en la misma fila (sin hueco).
+import TituloSeccion from "../components/titulo-seccion.astro";
+import { cliente } from "../data/cliente";
+
+const { encabezado, lista } = cliente.preguntas;
+---
+
+{
+  lista.length > 0 && (
+    <section id="preguntas">
+      <div class="dos">
+        <TituloSeccion {...encabezado} lado />
+
+        <div class="preguntas">
+          {lista.map(({ pregunta, respuesta }) => (
+            <details>
+              <summary class="flex-row">
+                {pregunta}
+                <i class="bi bi-plus-lg" aria-hidden="true" />
+              </summary>
+              <p>{respuesta}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .dos {
+    display: grid;
+    gap: var(--section-gap);
+  }
+
+  details {
+    border-bottom: solid 1px var(--clr-border);
+  }
+
+  summary {
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  details:first-child summary {
+    padding-top: 0;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* El «+» gira y queda como «×» al abrir */
+  summary i {
+    flex-shrink: 0;
+    color: var(--clr-text-muted);
+    transition: var(--transition);
+  }
+
+  details[open] summary i {
+    color: var(--clr-accent-text);
+    transform: rotate(45deg);
+  }
+
+  p {
+    max-width: var(--text-max);
+    padding-bottom: var(--space-5);
+  }
+
+  @media (hover: hover) {
+    summary:hover i {
+      color: var(--clr-text);
+    }
+  }
+
+  @media (min-width: 750px) {
+    .dos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--space-7);
+      padding-top: var(--space-5);
+      border-top: solid 1px var(--clr-border);
+    }
+  }
+</style>
